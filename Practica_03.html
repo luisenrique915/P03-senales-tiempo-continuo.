@@ -1,0 +1,747 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 3: Se&ntilde;ales tiempo continuo</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="Practica_03.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 3: Se&ntilde;ales tiempo continuo</h1><!--introduction--><p>Autores:</p><p>Hernandez Lugardo Luis Enrique.</p><p>Silverio Jim&eacute;nez Cesar Antonio.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Descripci&oacute;n general de MATLAB</a></li><li><a href="#2">GNU Octave</a></li><li><a href="#3">Python</a></li><li><a href="#4">Entregable 01</a></li><li><a href="#5">Entregable 02</a></li><li><a href="#7">Entregable 03</a></li><li><a href="#8">Entregable 04</a></li><li><a href="#25">Entregable 05</a></li><li><a href="#38">Entregable 06</a></li><li><a href="#45">Entregable 07</a></li><li><a href="#54">Referencias.</a></li></ul></div><h2 id="1">Descripci&oacute;n general de MATLAB</h2><p>En 1984 surge la primera versi&oacute;n, creado por Cleve Moler, con la idea de usar paquetes de subrutinas escritas en Fortran en los cursos de An&aacute;lisis Num&eacute;rico y Algebra Lineal, sin tener una necesidad de programas que usaran este lenguaje. El lenguaje de programaci&oacute;n M se cre&oacute; en 1970 proporcionando un acceso sencillo al Software de matrices LINPACK y EISPACK sin tener que hacer uso del lenguaje Fortran. Ya en 2004 se apreciaba que MATLAB era usado por aproximadamente m&aacute;s de un mill&oacute;n de personas, tanto acad&eacute;micos como empresarios.</p><p>Matem&aacute;ticas. Gr&aacute;ficos. Programaci&oacute;n. La plataforma MATLAB est&aacute; optimizada para resolver problemas de ingenier&iacute;a y cient&iacute;ficos. El lenguaje MATLAB basado en matriz es la forma m&aacute;s natural del mundo para expresar matem&aacute;ticas computacionales. Los gr&aacute;ficos integrados facilitan la visualizaci&oacute;n y la obtenci&oacute;n de informaci&oacute;n a partir de los datos. Una amplia biblioteca de cajas de herramientas preconstruidas le permite comenzar de inmediato con algoritmos esenciales para su dominio. El entorno de escritorio invita a la experimentaci&oacute;n, exploraci&oacute;n y descubrimiento. Estas herramientas y capacidades de MATLAB est&aacute;n rigurosamente probadas y dise&ntilde;adas para trabajar juntas.</p><p>Acontinuacion se dejaron algunos en lances para emprender en Matlab</p><p><a href="https://www.youtube.com/watch?v=npKnZdStgXM=">https://www.youtube.com/watch?v=npKnZdStgXM=</a></p><p><a href="http://webs.ucm.es/centros/cont/descargas/documento11541.pdf">http://webs.ucm.es/centros/cont/descargas/documento11541.pdf</a></p><p><a href="https://matlabacademy.mathworks.com/es">https://matlabacademy.mathworks.com/es</a></p><h2 id="2">GNU Octave</h2><p>Octave o GNU Octave es un programa y lenguaje de programaci&oacute;n para realizar c&aacute;lculos num&eacute;ricos. Como su nombre indica, Octave es parte del proyecto GNU. Es considerado el equivalente libre de MATLAB. Entre varias caracter&iacute;sticas que comparten, se puede destacar que ambos ofrecen un int&eacute;rprete, permitiendo ejecutar &oacute;rdenes en modo interactivo. N&oacute;tese que Octave no es un sistema de &aacute;lgebra computacional, como lo es Maxima, sino que est&aacute; orientado al an&aacute;lisis num&eacute;rico.</p><p>Detalles t&eacute;cnicos.</p><div><ul><li>Octave est&aacute; escrito en C++ usando la biblioteca STL.</li><li>Tiene un int&eacute;rprete de su propio lenguaje (de sintaxis casi id&eacute;ntica a Matlab), y permite una ejecuci&oacute;n interactiva o por lotes.</li><li>Su lenguaje puede ser extendido con funciones y procedimientos, por medio de m&oacute;dulos din&aacute;micos.</li><li>Utiliza otros programas GNU para ofrecer al usuario la posibilidad de crear gr&aacute;ficos para luego imprimirlos o guardarlos (Grace).</li><li>Dentro del lenguaje tambi&eacute;n se comporta como una consola de &oacute;rdenes (shell). Esto permite listar contenidos de directorios, por ejemplo.</li><li>Adem&aacute;s de correr en plataformas Unix tambi&eacute;n lo hace en Windows.</li><li>Puede cargar archivos con funciones de Matlab (reconocibles por la extensi&oacute;n .m).</li><li>Tiene ayuda en espa&ntilde;ol.</li></ul></div><h2 id="3">Python</h2><p>Python es un lenguaje de scripting independiente de plataforma y orientado a objetos, preparado para realizar cualquier tipo de programa, desde aplicaciones Windows a servidores de red o incluso, p&aacute;ginas web. Es un lenguaje interpretado, lo que significa que no se necesita compilar el c&oacute;digo fuente para poder ejecutarlo, lo que ofrece ventajas como la rapidez de desarrollo e inconvenientes como una menor velocidad. En los &uacute;ltimos a&ntilde;os el lenguaje se ha hecho muy popular, gracias a varias razones como:</p><div><ul><li>La cantidad de librer&iacute;as que contiene, tipos de datos y funciones incorporadas en el propio lenguaje, que ayudan a realizar muchas tareas habituales sin necesidad de tener que programarlas desde cero.</li><li>La sencillez y velocidad con la que se crean los programas. Un programa en Python puede tener de 3 a 5 l&iacute;neas de c&oacute;digo menos que su equivalente en Java o C.</li><li>La cantidad de plataformas en las que podemos desarrollar, como Unix, Windows, OS/2, Mac, Amiga y otros.</li><li>Adem&aacute;s, Python es gratuito, incluso para prop&oacute;sitos empresariales.</li></ul></div><h2 id="4">Entregable 01</h2><p>Crea una funci&oacute;n que se llame <i>fun1</i> y reciba dos parametros <img src="Practica_03_eq08589834809570054062.png" alt="$\omega$"> y <img src="Practica_03_eq05508344529756732484.png" alt="$a$"> la funci&oacute;n debe regresar la evaluaci&oacute;n <img src="Practica_03_eq01407365636722940873.png" alt="$F(\omega)=a/(a^2+\omega^2)$">, esta funci&oacute;n debe trabajr con <img src="Practica_03_eq16064389548595522758.png" alt="$a\in R$"> y <img src="Practica_03_eq02576817051637404792.png" alt="$t\in  R^n$">. Debe mostrar su c&oacute;digo en el reporte (sin ejecutar).</p><pre class="language-matlab"><span class="keyword">function</span> [x1]= fun1(w,a)
+  x1=(a)/(a^2+w^2)
+<span class="keyword">end</span>
+</pre><h2 id="5">Entregable 02</h2><p>Construya una funci&oacute;n que gr&aacute;fique funciones de <img src="Practica_03_eq02145986785580767623.png" alt="$f:R\rightarrow R$"> en el formato de su elecci&oacute;n y pruebe su c&oacute;digo mostrando la gr&aacute;fica de <img src="Practica_03_eq04634431881849194213.png" alt="$F(\omega)$"> vs <img src="Practica_03_eq08589834809570054062.png" alt="$\omega$"> en el intervalo <img src="Practica_03_eq01169792831847459841.png" alt="$[-2,2]$"> para <img src="Practica_03_eq13016372792947090052.png" alt="$a=1$">, no debe incluir el c&oacute;digo, solo el uso de la funci&oacute;n para mostrar la gr&aacute;fica</p><pre class="codeinput">w=[-2:0.01:2];
+a=1;
+plot(w,fun1(w,a));
+</pre><img vspace="5" hspace="5" src="Practica_03_01.png" alt=""> <h2 id="7">Entregable 03</h2><p>Construya una funci&oacute;n que gr&aacute;fique funciones de <img src="Practica_03_eq07287922491706758619.png" alt="$f:R\rightarrow R^2$"> en el formato de su elecci&oacute;n y pruebe su c&oacute;digo mostrando la gr&aacute;fica de la transformada de Fourier <img src="Practica_03_eq14837990414550488255.png" alt="$F(w)$"> en <img src="Practica_03_eq01315095555081819470.png" alt="$[-10,10]$"> de la funci&oacute;n <img src="Practica_03_eq16179711886080607310.png" alt="$f(t)=e^{-2t}u(t)$">, puede utilizar una funci&oacute;n anonima para este fin, no debe incluir el c&oacute;digo, solo el uso de la funci&oacute;n para mostrarla gr&aacute;fica. Reporte la gr&aacute;fica de <img src="Practica_03_eq09478123530129115431.png" alt="$f(t)$"> de <img src="Practica_03_eq05003862285080136837.png" alt="$[-1,5]$"> (recuerde que ya tiene una funci&oacute;n para esto). Reporte del espectro de magnitud y del espectro de fase en <img src="Practica_03_eq01315095555081819470.png" alt="$[-10,10]$"> (puedes con sultar con help la descripci&oacute;n de <i>abs</i>, <i>angle</i>, <i>atan2</i>). Solo reporte las graficas.</p><h2 id="8">Entregable 04</h2><p>Realiza las mismas operaciones que Lathi en las secciones M1.1 a M1.4 que se encuentra al final del cap&iacute;tulo 1 y antes de la secci&oacute;n de problemas, cambie los <i>inline</i> por funciones anonimas.</p><p>M1.1 Funciones de l&iacute;nea</p><p>Considere definir la sinusoide amortiguada exponencialmente <img src="Practica_03_eq03982229222250725555.png" alt="$f(t)=e^-tcos(2pit)$">.</p><pre>     &gt;&gt; f = @(t) (exp(-t).*cos(2*pi*t))
+     f(t) = exp(-t).*cos(2*pi*t)</pre><p>Una vez definido, <img src="Practica_03_eq09478123530129115431.png" alt="$f(t)$"> puede evaluarse simplemente pasando los valores     de entrada de inter&eacute;s. Por ejemplo,</p><pre>     &gt;&gt; t = 0;
+     &gt;&gt; f(t)
+     ans = 1</pre><p>Suponga que el vector t se elige para incluir solo los enteros contenidos en <img src="Practica_03_eq16891268338047420299.png" alt="$(-2 < t < 2)$">, a saber <img src="Practica_03_eq12396678974798729670.png" alt="$[-2,-1, 0, 1, 2]$">.</p><pre>     &gt;&gt; t =(-2:2);</pre><p>Esta entrada vectorial se eval&uacute;a para formar una salida vectorial. El comando plot representa gr&aacute;ficamente el resultado, que se muestra en la figura.</p><pre>     &gt;&gt; plot(t,f(t));
+     &gt;&gt; xlabel('t'); ylable('f(t)'); grid;</pre><pre class="codeinput">f = @(t) (exp(-t).*cos(2*pi*t));
+t =(-2:2);
+plot(t,f(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="Practica_03_02.png" alt=""> <p>Las l&iacute;neas de cuadr&iacute;cula, agregadas mediante el comando de cuadr&iacute;cula, ayudan a la identificaci&oacute;n de caracter&iacute;sticas. Desafortunadamente, la trama no ilustra el comportamiento oscilatorio esperado. Se requieren m&aacute;s puntos para representar adecuadamente <img src="Practica_03_eq09478123530129115431.png" alt="$f(t)$">.</p><p>La pregunta, entonces, es &iquest;cu&aacute;ntos puntos son suficientes? Si se eligen muy pocos puntos, se pierde informaci&oacute;n. Si se eligen demasiados puntos, se desperdician memoria y tiempo. Se necesita un equilibrio. Para las funciones oscilatorias, el trazado de 20 a 200 puntos por oscilaci&oacute;n es normalmente adecuado. Para el presente caso, se elige t para dar 100 puntos por oscilaci&oacute;n.</p><pre>     &gt;&gt; t = (-2:0.01:2);</pre><p>Nuevamente, la funci&oacute;n se eval&uacute;a y se traza.</p><pre>     &gt;&gt; plot (t,f(t));
+     &gt;&gt; xlabel('t'); ylabel('f(t)'); grid;</pre><p>El resultado, que se muestra en la Figura, es una representaci&oacute;n precisa de <img src="Practica_03_eq09478123530129115431.png" alt="$f(t)$">.</p><pre class="codeinput">f = @(t) (exp(-t).*cos(2*pi*t));
+t =(-2:0.01:2);
+plot(t,f(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+</pre><img vspace="5" hspace="5" src="Practica_03_03.png" alt=""> <p>M1.2  Operadores relacionales y la funci&oacute;n de paso de unidad</p><p>La funci&oacute;n de paso unitario se define f&aacute;cilmente utilizando el operador relacional &gt;=.</p><pre>     &gt;&gt; u = @(t)(t&gt;=0)
+     u(t) = (t&gt;=0)</pre><p>Cualquier funci&oacute;n con una discontinuidad de salto, como el paso de la unidad, es dif&iacute;cil de trazar. Considere trazar <img src="Practica_03_eq17794740544861059683.png" alt="$u(t)$"> usando <img src="Practica_03_eq10772458515643251906.png" alt="$t =(?2:2)$">.</p><pre>     &gt;&gt; t = (-2:2);
+     &gt;&gt; plot (t,u(t));
+     &gt;&gt; xlable('t'); ylabel('u(t)');</pre><pre class="codeinput">u = @(t)(t&gt;=0);
+t = (-2:2);
+plot (t,u(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'u(t)'</span>);
+</pre><img vspace="5" hspace="5" src="Practica_03_04.png" alt=""> <p>El primer problema se corrige ampliando verticalmente el cuadro delimitador con el comando de eje. El segundo problema se reduce, pero no se elimina, al agregar puntos al vector t.</p><pre>     &gt;&gt; t = (-2:0.01:2);
+     &gt;&gt; plot (t,u(t));
+     &gt;&gt; xlable('t'); ylabel('u(t)');
+     &gt;&gt; axis ([-2 2 -0.1 1.1]);</pre><pre class="codeinput">u = @(t)(t&gt;=0);
+t = (-2:0.01:2);
+plot (t,u(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'u(t)'</span>);
+axis ([-2 2 -0.1 1.1]);
+</pre><img vspace="5" hspace="5" src="Practica_03_05.png" alt=""> <p>Los operadores relacionales se pueden combinar usando AND l&oacute;gico, OR l&oacute;gico y negaci&oacute;n l&oacute;gica: &amp;, | y ~, respectivamente. Por ejemplo, (t&gt; 0) y (t <a href="1)">y ~ ((t &lt;= 0) | (t</a> = 1)) ambos prueban si 0 &lt;t &lt;1. ??Para demostrarlo, considere definir y graficar la unidad de pulso p (t) = u (t) - u (t - 1), como se muestra en la figura</p><pre>     &gt;&gt; p = inline('(t&gt;=0) &amp; (t&lt;1)','t');
+     &gt;&gt; t = (-1:0.01:2); plot(t,p(t));
+     &gt;&gt; xlabel('t'); ylabel('p(t) = u(t)-u(t-1)');
+     &gt;&gt; axis ([-1 2 -.1 1.1]);</pre><pre class="codeinput">p = @(t)((t&gt;=0) &amp; (t&lt;1));
+t = (-1:0.01:2); plot(t,p(t));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'p(t) = u(t)-u(t-1)'</span>);
+axis ([-1 2 -.1 1.1]);
+</pre><img vspace="5" hspace="5" src="Practica_03_06.png" alt=""> <p>M1.3 Visualizaci&oacute;n de operaciones en la variable independiente.</p><p>Considere <img src="Practica_03_eq10928372334418011919.png" alt="$g (t) = f (t) u (t) = e^?t cos (2(pi)t)u(t)$"> una versi&oacute;n realizable de <img src="Practica_03_eq09478123530129115431.png" alt="$f(t)$">. Desafortunadamente, MATLAB no puede multiplicar objetos en l&iacute;nea. Es decir, MATLAB informa un error para <img src="Practica_03_eq07399846880747662223.png" alt="$g=f*u$"> cuando f y u son objetos en l&iacute;nea. M&aacute;s bien, <img src="Practica_03_eq00097224828082125527.png" alt="$g(t)$"> necesita ser definida expl&iacute;citamente.</p><pre>     &gt;&gt; g = @(t) (exp(-t).*cos(2*pi*t).*(t&gt;=0))
+     g(t) = exp(-t).*cos(2*pi*t).*(t&gt;=0)</pre><p>Una operaci&oacute;n combinada de desplazamiento y escalado est&aacute; representada por <img src="Practica_03_eq10624816381410785985.png" alt="$g(en+b)$">, donde a y b son constantes reales arbitrarias. Como ejemplo, considere trazar <img src="Practica_03_eq14491512693946539684.png" alt="$g(2t+1)$"> sobre (?2 &lt; t &lt; 2). Con a = 2, la funci&oacute;n se comprime por un factor de 2, lo que resulta en el doble de las oscilaciones por unidad t. Agregando la condici&oacute;n b &gt; 0, la forma de onda se desplaza hacia la izquierda. Dada la funci&oacute;n en l&iacute;nea g, es casi trivial obtener una gr&aacute;fica precisa.</p><pre>     &gt;&gt; t = (-2:0.01:2);
+     &gt;&gt; plot(t,g(2*t+1)); xlabel('t'); ylabel('g(2t+1)')'; grid;</pre><pre class="codeinput">g = @(t) (exp(-t).*cos(2*pi*t).*(t&gt;=0))
+t = (-2:0.01:2);
+plot(t,g(2*t+1));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(2t+1)'</span>); grid;
+</pre><pre class="codeoutput">
+g =
+
+  function_handle with value:
+
+    @(t)(exp(-t).*cos(2*pi*t).*(t&gt;=0))
+
+</pre><img vspace="5" hspace="5" src="Practica_03_07.png" alt=""> <p>Luego, considere trazar <img src="Practica_03_eq13616380641671935073.png" alt="$g(-t + 1)$"> sobre (-2 &lt; t &lt; 2). Como a &lt;0, la forma de onda se reflejar&aacute;. Agregando la condici&oacute;n b &gt; 0, la forma de onda final se desplaza hacia la derecha</p><pre>     &gt;&gt; plot(t,g(-t+1)); xlabel('t'); ylabel('g(-t+1)')'; grid;</pre><pre class="codeinput">g = @(t) (exp(-t).*cos(2*pi*t).*(t&gt;=0))
+t = (-2:0.01:2);
+plot(t,g(-t+1));
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'g(-t+1)'</span>)'; grid;
+</pre><pre class="codeoutput">
+g =
+
+  function_handle with value:
+
+    @(t)(exp(-t).*cos(2*pi*t).*(t&gt;=0))
+
+</pre><img vspace="5" hspace="5" src="Practica_03_08.png" alt=""> <p>M1.4 Integraci&oacute;n num&eacute;rica y estimaci&oacute;n de energ&iacute;a de se&ntilde;al</p><p>Para comenzar, considere la se&ntilde;al simple <img src="Practica_03_eq17102971359874885865.png" alt="$x(t) = e^{-t}(u(t)-u(t - 1))$">.</p><pre>     &gt;&gt; x = inline('exp(-t).*((t&gt;=0)&amp;(t&lt;1))','t');</pre><p>Dejando <img src="Practica_03_eq04094567007182784253.png" alt="$\delta t = 0.01$">, se crea un vector de tiempo adecuado.</p><pre>     &gt;&gt; t = (0:0.01:1);</pre><p>El resultado final se calcula utilizando el comando sum.</p><pre>     &gt;&gt; E_x =sum(x(t).*x(t)*0.01)
+     E_x = 0.4367</pre><p>El resultado no es perfecto, pero con un 1% de error relativo est&aacute; cerca. Al reducir \delta t, se mejora la aproximaci&oacute;n. Por ejemplo, \delta t = 0.001 produce E_x = 0.4328, o 0.1% de error relativo.</p><p>Para usar quad para estimar Ex, primero se debe describir el integrando.</p><pre>      &gt;&gt; x_squared = @(t)(exp(-2*t).*((t&gt;=0)&amp;(t&gt;1)));</pre><p>Estimando Ex sigue inmediatamente.</p><pre>     &gt;&gt; E_x = quad(x_squared,0,1)
+     E_x = 0.4323</pre><p>En este caso, el error relativo es -0.0026%.</p><pre class="language-matlab">&gt;&gt; g_squared = @(t) (exp(-2*t).*(cos(2*pi*t).*^2).*(t&gt;=0));
+</pre><p>Aunque el l&iacute;mite superior de integraci&oacute;n es infinito, la envoltura que se desintegra exponencialmente asegura que <img src="Practica_03_eq00097224828082125527.png" alt="$g(t)$"> sea efectivamente cero mucho antes de t = 100. Por lo tanto, se usa un l&iacute;mite superior de t = 100 junto con \delta t = 0.001.</p><pre>     &gt;&gt; t = (0:0.001:100);
+     &gt;&gt; E_g = sum(g_squared(t)*0.001)
+     E g = 0.2567</pre><p>Se obtiene una aproximaci&oacute;n ligeramente mejor con la funci&oacute;n quad.</p><pre>     &gt;&gt; E_g = quad(g_squared, 0,100)
+     E_g = 0.2562</pre><h2 id="25">Entregable 05</h2><p>Resuelve el problema 1.2.2 usando las herramientas del paso anterior.</p><pre class="codeinput">t=(-4:0.05:2);
+f=@(t)((-4&lt;t)&amp;(t&lt;0)).*(-t)+((0&lt;t)&amp;(t&lt;2)).*(t);
+plot(t, f(t))
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+axis([-5 3 -1 5])
+</pre><img vspace="5" hspace="5" src="Practica_03_09.png" alt=""> <div><ul><li>Para la se&ntilde;al Ilustrada en la figura, bosqueje:</li></ul></div><p>a)  <img src="Practica_03_eq12657945112240979270.png" alt="$x(t-4)$"></p><pre class="codeinput">t=(-4:0.05:8);
+f=@(t)((-4&lt;t)&amp;(t&lt;0)).*(-t)+((0&lt;t)&amp;(t&lt;2)).*(t);
+plot(t, f(t-4))
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+axis([-1 7 -1 5])
+</pre><img vspace="5" hspace="5" src="Practica_03_10.png" alt=""> <p>b)  <img src="Practica_03_eq05646767302502220401.png" alt="$x(2t/3)$"></p><pre class="codeinput">t=(-6:0.05:8);
+f=@(t)((-4&lt;t)&amp;(t&lt;0)).*(-t)+((0&lt;t)&amp;(t&lt;2)).*(t);
+plot(t, f((2*t)/3))
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+axis([-7 7 -1 5])
+</pre><img vspace="5" hspace="5" src="Practica_03_11.png" alt=""> <p>c)  <img src="Practica_03_eq09897293323470263254.png" alt="$x(-t)$"></p><pre class="codeinput">t=(-6:0.05:8);
+f=@(t)((-4&lt;t)&amp;(t&lt;0)).*(-t)+((0&lt;t)&amp;(t&lt;2)).*(t);
+plot(t, f(-t))
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+axis([-7 7 -1 5])
+</pre><img vspace="5" hspace="5" src="Practica_03_12.png" alt=""> <p>d)  <img src="Practica_03_eq03542025780904024759.png" alt="$x(2t-4)$"></p><pre class="codeinput">t=(-6:0.05:8);
+f=@(t)((-4&lt;t)&amp;(t&lt;0)).*(-t)+((0&lt;t)&amp;(t&lt;2)).*(t);
+plot(t, f(2*t-4))
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+axis([-7 7 -1 5])
+</pre><img vspace="5" hspace="5" src="Practica_03_13.png" alt=""> <p>e)  <img src="Practica_03_eq06543333246515609381.png" alt="$x(2-t)$"></p><pre class="codeinput">t=(-6:0.05:8);
+f=@(t)((-4&lt;t)&amp;(t&lt;0)).*(-t)+((0&lt;t)&amp;(t&lt;2)).*(t);
+plot(t, f(2-t))
+xlabel(<span class="string">'t'</span>); ylabel(<span class="string">'f(t)'</span>); grid;
+axis([-7 7 -1 5])
+</pre><img vspace="5" hspace="5" src="Practica_03_14.png" alt=""> <h2 id="38">Entregable 06</h2><p>Escriba una funci&oacute;n que se llame <i>energia</i> que reciba como argumento una funci&oacute;n (anonima o simbolica) y que regrese el calculo de la energ&iacute;a, para esto puede resultar &uacute;til investigar las instrucciones <i>int</i> , <i>integral</i> Se presupone utilizar el c&oacute;digo solo con funciones de energia. Muestre el c&oacute;digo sin ejecutar, y posteriormente resuelva el problema 1.1.3</p><pre>     function [energia]=Energia(x,li, ls)</pre><pre>         energia=double(x^2,li,ls);
+     end</pre><p>Ahora calculamos la energ&iacute;a del ejercicio 1.1.3</p><p>inciso a</p><pre class="codeinput">syms <span class="string">t</span>;
+ ex(1*t,0,1)
+
+ ex(-1*t,1,2)
+
+ ex((1+(-1))*t,0,2)
+
+ ex((1-(-1))*t,0,2)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+1/3
+ 
+ 
+ans =
+ 
+7/3
+ 
+ 
+ans =
+ 
+0
+ 
+ 
+ans =
+ 
+32/3
+ 
+</pre><pre class="codeinput"><span class="comment">% Inciso b</span>
+</pre><pre class="codeinput"> ex(sin(t),0,2*pi)
+
+ ex(1*t,0,2*pi)
+
+ ex(sin(t)+1,0,2*pi)
+
+ ex(sin(t)-1,0,2*pi)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+pi
+ 
+ 
+ans =
+ 
+(8*pi^3)/3
+ 
+ 
+ans =
+ 
+3*pi
+ 
+ 
+ans =
+ 
+3*pi
+ 
+</pre><p>Inciso c</p><pre class="codeinput"> ex(sin(t),0,pi)
+
+ ex(1*t,0,pi)
+
+ ex(sin(t)+1,0,pi)
+
+ ex(sin(t)-1,0,pi)
+</pre><pre class="codeoutput"> 
+ans =
+ 
+pi/2
+ 
+ 
+ans =
+ 
+pi^3/3
+ 
+ 
+ans =
+ 
+(3*pi)/2 + 4
+ 
+ 
+ans =
+ 
+(3*pi)/2 - 4
+ 
+</pre><h2 id="45">Entregable 07</h2><p>Escriba una funci&oacute;n que se llame <i>potencia</i> que reciba como argumento una funci&oacute;n (anonima o simbolica) y que regrese el calculo de la potencia para esto puede resultar &uacute;til investigar las instrucciones <i>int</i> , <i>integral</i> Se presupone utilizar el c&oacute;digo solo con funciones de potencia. Muestre el c&oacute;digo sin ejecutar, y posteriormente resuelva el problema 1.1.4</p><pre class="language-matlab"><span class="keyword">function</span> [potencia,rms] = px(x,li,ls)
+    <span class="keyword">if</span> li&lt;0
+        li=(-1)*li;
+    <span class="keyword">end</span>
+    potencia=(1/(li+ls))*(int(x^2,-li/2,ls/2));
+    format <span class="string">short</span>;
+    rms=sqrt(potencia);
+    rms=vpa(rms,5);
+<span class="keyword">end</span>
+</pre><p>Resolvemos el ejercicio 1.1.4</p><p>Inciso a</p><pre class="codeinput">syms <span class="string">x</span> <span class="string">c</span>;
+</pre><pre class="codeinput"> px(-x,-2,2)
+</pre><pre class="codeoutput"> 
+potencia =
+ 
+1/6
+ 
+ 
+rms =
+ 
+0.40825
+ 
+ 
+ans =
+ 
+1/6
+ 
+</pre><p>Inciso b</p><pre class="codeinput"> px(2*x,-2,2)
+</pre><pre class="codeoutput"> 
+potencia =
+ 
+2/3
+ 
+ 
+rms =
+ 
+0.8165
+ 
+ 
+ans =
+ 
+2/3
+ 
+</pre><p>Inciso c</p><pre class="codeinput"> px(c*x,-2,2)
+</pre><pre class="codeoutput"> 
+potencia =
+ 
+c^2/6
+ 
+ 
+rms =
+ 
+(0.16667*c^2)^(1/2)
+ 
+ 
+ans =
+ 
+c^2/6
+ 
+</pre><h2 id="54">Referencias.</h2><p><a href="https://www.mathworks.com/help/matlab/learn_matlab/product-description.html">https://www.mathworks.com/help/matlab/learn_matlab/product-description.html</a></p><p><a href="https://www.ecured.cu/MATLAB">https://www.ecured.cu/MATLAB</a></p><p><a href="https://es.wikipedia.org/wiki/GNU_Octave">https://es.wikipedia.org/wiki/GNU_Octave</a></p><p>B. P. Lathi, Linear Systems and Signals, Second Edition, Oxford</p><p>University Press, Inc.,  2005, segunda edicion, pp. 689.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 3: Señales tiempo continuo
+%
+% Autores:
+%
+% Hernandez Lugardo Luis Enrique.
+%
+% Silverio Jiménez Cesar Antonio.
+%
+%%
+%% Descripción general de MATLAB
+% En 1984 surge la primera versión, creado por Cleve Moler, con la idea de usar paquetes de subrutinas escritas en Fortran en los cursos de Análisis Numérico y Algebra Lineal, sin tener una necesidad de programas que usaran este lenguaje.
+% El lenguaje de programación M se creó en 1970 proporcionando un acceso sencillo al Software de matrices LINPACK y EISPACK sin tener que hacer uso del lenguaje Fortran.
+% Ya en 2004 se apreciaba que MATLAB era usado por aproximadamente más de un millón de personas, tanto académicos como empresarios.
+%
+% Matemáticas. Gráficos. Programación.
+% La plataforma MATLAB está optimizada para resolver problemas de ingeniería y científicos. El lenguaje MATLAB basado en matriz es la 
+% forma más natural del mundo para expresar matemáticas computacionales. Los gráficos integrados facilitan la visualización y la obtención 
+% de información a partir de los datos. Una amplia biblioteca de cajas de herramientas preconstruidas le permite comenzar de inmediato con 
+% algoritmos esenciales para su dominio. El entorno de escritorio invita a la experimentación, exploración y descubrimiento. 
+% Estas herramientas y capacidades de MATLAB están rigurosamente probadas y diseñadas para trabajar juntas. 
+%
+% Acontinuacion se dejaron algunos en lances para emprender en Matlab
+%
+% <https://www.youtube.com/watch?v=npKnZdStgXM=>
+%
+% <http://webs.ucm.es/centros/cont/descargas/documento11541.pdf>
+%
+% <https://matlabacademy.mathworks.com/es>
+%
+%% GNU Octave
+% Octave o GNU Octave es un programa y lenguaje de programación para realizar cálculos numéricos. Como su nombre indica, Octave es parte 
+% del proyecto GNU. Es considerado el equivalente libre de MATLAB. Entre varias características que comparten, se puede destacar que ambos
+% ofrecen un intérprete, permitiendo ejecutar órdenes en modo interactivo. Nótese que Octave no es un sistema de álgebra computacional, 
+% como lo es Maxima, sino que está orientado al análisis numérico.
+%
+% Detalles técnicos.
+%
+% * Octave está escrito en C++ usando la biblioteca STL.
+% * Tiene un intérprete de su propio lenguaje (de sintaxis casi idéntica a Matlab), y permite una ejecución interactiva o por lotes.
+% * Su lenguaje puede ser extendido con funciones y procedimientos, por medio de módulos dinámicos.
+% * Utiliza otros programas GNU para ofrecer al usuario la posibilidad de crear gráficos para luego imprimirlos o guardarlos (Grace).
+% * Dentro del lenguaje también se comporta como una consola de órdenes (shell). Esto permite listar contenidos de directorios, por ejemplo.
+% * Además de correr en plataformas Unix también lo hace en Windows.
+% * Puede cargar archivos con funciones de Matlab (reconocibles por la extensión .m).
+% * Tiene ayuda en español.
+% 
+%% Python
+% Python es un lenguaje de scripting independiente de plataforma y orientado a objetos, preparado para realizar cualquier tipo de programa, 
+% desde aplicaciones Windows a servidores de red o incluso, páginas web. Es un lenguaje interpretado, lo que significa que no se necesita 
+% compilar el código fuente para poder ejecutarlo, lo que ofrece ventajas como la rapidez de desarrollo e inconvenientes como una menor 
+% velocidad.
+% En los últimos años el lenguaje se ha hecho muy popular, gracias a varias razones como:
+%
+% * La cantidad de librerías que contiene, tipos de datos y funciones incorporadas en el propio lenguaje, que ayudan a realizar muchas tareas habituales sin necesidad de tener que programarlas desde cero.
+% * La sencillez y velocidad con la que se crean los programas. Un programa en Python puede tener de 3 a 5 líneas de código menos que su equivalente en Java o C.
+% * La cantidad de plataformas en las que podemos desarrollar, como Unix, Windows, OS/2, Mac, Amiga y otros.
+% * Además, Python es gratuito, incluso para propósitos empresariales.
+%% Entregable 01
+%
+% Crea una función que se llame _fun1_ y reciba dos parametros $\omega$ y 
+% $a$ la función debe regresar la evaluación $F(\omega)=a/(a^2+\omega^2)$,
+% esta función debe trabajr con $a\in R$ y $t\in  R^n$. Debe
+% mostrar su código en el reporte (sin ejecutar).
+%
+%
+%
+%
+%   function [x1]= fun1(w,a)
+%     x1=(a)/(a^2+w^2)
+%   end
+%% Entregable 02
+% Construya una función que gráfique funciones de
+% $f:R\rightarrow R$ en el formato de su elección y pruebe
+% su código mostrando la gráfica de $F(\omega)$ vs $\omega$ en el intervalo
+% $[-2,2]$ para $a=1$, no debe
+% incluir el código, solo el uso de la función para mostrar la gráfica
+%%
+% 
+% 
+w=[-2:0.01:2];
+a=1;
+plot(w,fun1(w,a));
+
+%% Entregable 03
+% Construya una función que gráfique funciones de
+% $f:R\rightarrow R^2$ en el formato de su elección y pruebe
+% su código mostrando la gráfica de la transformada de Fourier $F(w)$ en
+% $[-10,10]$ de la función $f(t)=e^{-2t}u(t)$, puede utilizar una función
+% anonima para este fin, no debe incluir el código, solo el uso de la 
+% función para mostrarla gráfica. Reporte la gráfica de $f(t)$ de 
+% $[-1,5]$ (recuerde que ya tiene una función para esto). Reporte 
+% del espectro de magnitud y del espectro de fase en $[-10,10]$ (puedes con
+% sultar con help la descripción de _abs_, _angle_, _atan2_). Solo
+% reporte las graficas.
+
+%% Entregable 04
+% Realiza las mismas operaciones que Lathi en las secciones M1.1 a M1.4
+% que se encuentra al final del capítulo 1 y antes de la sección de
+% problemas, cambie los _inline_ por funciones anonimas.
+% 
+% M1.1 Funciones de línea
+%
+% Considere definir la sinusoide amortiguada exponencialmente 
+% $f(t)=e^-tcos(2pit)$.
+%
+%       >> f = @(t) (exp(-t).*cos(2*pi*t))  
+%       f(t) = exp(-t).*cos(2*pi*t)
+%
+% Una vez definido, $f(t)$ puede evaluarse simplemente pasando los valores
+%     de entrada de interés. Por ejemplo,
+%
+%       >> t = 0; 
+%       >> f(t) 
+%       ans = 1
+%
+% Suponga que el vector t se elige para incluir solo los enteros 
+% contenidos en $(-2 < t < 2)$, a saber $[-2,-1, 0, 1, 2]$.
+%
+%       >> t =(-2:2);
+%
+% Esta entrada vectorial se evalúa para formar una salida vectorial.
+% El comando plot representa gráficamente el resultado, que se
+% muestra en la figura.
+%
+%       >> plot(t,f(t)); 
+%       >> xlabel('t'); ylable('f(t)'); grid;
+%%
+f = @(t) (exp(-t).*cos(2*pi*t));
+t =(-2:2);
+plot(t,f(t));
+xlabel('t'); ylabel('f(t)'); grid;
+
+%%
+%%
+% Las líneas de cuadrícula, agregadas mediante el comando de cuadrícula, 
+% ayudan a la identificación de características. Desafortunadamente, 
+% la trama no ilustra el comportamiento oscilatorio esperado. Se requieren 
+% más puntos para representar adecuadamente $f(t)$. 
+%
+% La pregunta, entonces, es ¿cuántos puntos son suficientes? Si se eligen 
+% muy pocos puntos, se pierde información. Si se eligen demasiados puntos, 
+% se desperdician memoria y tiempo. Se necesita un equilibrio. Para las 
+% funciones oscilatorias, el trazado de 20 a 200 puntos por oscilación es 
+% normalmente adecuado. Para el presente caso, se elige t para dar 100 
+% puntos por oscilación.
+%
+%       >> t = (-2:0.01:2);
+%
+% Nuevamente, la función se evalúa y se traza.
+%
+%       >> plot (t,f(t)); 
+%       >> xlabel('t'); ylabel('f(t)'); grid;
+%
+% El resultado, que se muestra en la Figura, es una representación precisa de $f(t)$.
+%%
+f = @(t) (exp(-t).*cos(2*pi*t));
+t =(-2:0.01:2);
+plot(t,f(t));
+xlabel('t'); ylabel('f(t)'); grid;
+
+%% 
+% M1.2  Operadores relacionales y la función de paso de unidad
+%
+% La función de paso unitario se define fácilmente utilizando el operador 
+% relacional >=.
+%
+%       >> u = @(t)(t>=0) 
+%       u(t) = (t>=0)
+%
+% Cualquier función con una discontinuidad de salto, como el paso de la 
+% unidad, es difícil de trazar. Considere trazar $u(t)$ usando $t =(?2:2)$.
+%
+%       >> t = (-2:2); 
+%       >> plot (t,u(t)); 
+%       >> xlable('t'); ylabel('u(t)');
+%%
+u = @(t)(t>=0);
+t = (-2:2); 
+plot (t,u(t)); 
+xlabel('t'); ylabel('u(t)');
+
+%%
+% El primer problema se corrige ampliando verticalmente el cuadro 
+% delimitador con el comando de eje. El segundo problema se reduce, pero no
+% se elimina, al agregar puntos al vector t.
+%
+%       >> t = (-2:0.01:2); 
+%       >> plot (t,u(t)); 
+%       >> xlable('t'); ylabel('u(t)'); 
+%       >> axis ([-2 2 -0.1 1.1]);
+%%
+u = @(t)(t>=0);
+t = (-2:0.01:2); 
+plot (t,u(t)); 
+xlabel('t'); ylabel('u(t)'); 
+axis ([-2 2 -0.1 1.1]);
+%%
+% Los operadores relacionales se pueden combinar usando AND lógico, OR lógico y negación lógica: &, | y ~, respectivamente. Por ejemplo, (t> 0) y (t <1) y ~ ((t <= 0) | (t> = 1)) ambos prueban si 0 <t <1. ??Para demostrarlo, considere definir y graficar la unidad de pulso p (t) = u (t) - u (t - 1), como se muestra en la figura
+%
+%       >> p = inline('(t>=0) & (t<1)','t');        
+%       >> t = (-1:0.01:2); plot(t,p(t)); 
+%       >> xlabel('t'); ylabel('p(t) = u(t)-u(t-1)'); 
+%       >> axis ([-1 2 -.1 1.1]);
+%%
+p = @(t)((t>=0) & (t<1));        
+t = (-1:0.01:2); plot(t,p(t)); 
+xlabel('t'); ylabel('p(t) = u(t)-u(t-1)'); 
+axis ([-1 2 -.1 1.1]);
+
+%%
+% M1.3 Visualización de operaciones en la variable independiente.
+%
+% Considere $g (t) = f (t) u (t) = e^?t cos (2(pi)t)u(t)$ una versión realizable de $f(t)$. Desafortunadamente, MATLAB no puede multiplicar objetos en línea. Es decir, MATLAB informa un error para $g=f*u$ cuando f y u son objetos en línea. Más bien, $g(t)$ necesita ser definida explícitamente.
+%
+%       >> g = @(t) (exp(-t).*cos(2*pi*t).*(t>=0)) 
+%       g(t) = exp(-t).*cos(2*pi*t).*(t>=0)
+%
+% Una operación combinada de desplazamiento y escalado está representada por $g(en+b)$, donde a y b son constantes reales arbitrarias. Como ejemplo, considere trazar $g(2t+1)$ sobre (?2 < t < 2). Con a = 2, la función se comprime por un factor de 2, lo que resulta en el doble de las oscilaciones por unidad t. Agregando la condición b > 0, la forma de onda se desplaza hacia la izquierda. Dada la función en línea g, es casi trivial obtener una gráfica precisa.
+%
+%       >> t = (-2:0.01:2); 
+%       >> plot(t,g(2*t+1)); xlabel('t'); ylabel('g(2t+1)')'; grid;
+%
+%%
+g = @(t) (exp(-t).*cos(2*pi*t).*(t>=0))
+t = (-2:0.01:2); 
+plot(t,g(2*t+1)); 
+xlabel('t'); ylabel('g(2t+1)'); grid;
+%%
+%
+% Luego, considere trazar $g(-t + 1)$ sobre (-2 < t < 2). Como a <0, la forma de onda se reflejará. Agregando la condición b > 0, la forma de onda final se desplaza hacia la derecha
+%
+%       >> plot(t,g(-t+1)); xlabel('t'); ylabel('g(-t+1)')'; grid;
+%
+%%
+g = @(t) (exp(-t).*cos(2*pi*t).*(t>=0))
+t = (-2:0.01:2); 
+plot(t,g(-t+1)); 
+xlabel('t'); ylabel('g(-t+1)')'; grid;
+
+%%
+%
+% M1.4 Integración numérica y estimación de energía de señal
+%
+% Para comenzar, considere la señal simple $x(t) = e^{-t}(u(t)-u(t - 1))$. 
+%
+%       >> x = inline('exp(-t).*((t>=0)&(t<1))','t');
+%
+% Dejando $\delta t = 0.01$, se crea un vector de tiempo adecuado.
+%
+%       >> t = (0:0.01:1);
+%
+% El resultado final se calcula utilizando el comando sum.
+%
+%       >> E_x =sum(x(t).*x(t)*0.01) 
+%       E_x = 0.4367
+%
+% El resultado no es perfecto, pero con un 1% de error relativo está cerca. Al reducir \delta t, se mejora la aproximación. Por ejemplo, \delta t = 0.001 produce E_x = 0.4328, o 0.1% de error relativo.
+% 
+% Para usar quad para estimar Ex, primero se debe describir el integrando.
+%
+%        >> x_squared = @(t)(exp(-2*t).*((t>=0)&(t>1)));
+%
+% Estimando Ex sigue inmediatamente.
+%
+%       >> E_x = quad(x_squared,0,1) 
+%       E_x = 0.4323
+%
+% En este caso, el error relativo es -0.0026%.
+% 
+%   >> g_squared = @(t) (exp(-2*t).*(cos(2*pi*t).*^2).*(t>=0));
+%
+% Aunque el límite superior de integración es infinito, la envoltura que se desintegra exponencialmente asegura que $g(t)$ sea efectivamente cero mucho antes de t = 100. Por lo tanto, se usa un límite superior de t = 100 junto con \delta t = 0.001.
+%
+%       >> t = (0:0.001:100); 
+%       >> E_g = sum(g_squared(t)*0.001) 
+%       E g = 0.2567
+%
+% Se obtiene una aproximación ligeramente mejor con la función quad.
+%
+%       >> E_g = quad(g_squared, 0,100) 
+%       E_g = 0.2562
+%
+%%
+%% Entregable 05
+% Resuelve el problema 1.2.2 usando las herramientas del paso anterior. 
+%
+%%
+
+t=(-4:0.05:2);
+f=@(t)((-4<t)&(t<0)).*(-t)+((0<t)&(t<2)).*(t);
+plot(t, f(t))
+xlabel('t'); ylabel('f(t)'); grid;
+axis([-5 3 -1 5])
+%%
+% * Para la señal Ilustrada en la figura, bosqueje:
+%
+% a)  $x(t-4)$
+%
+%%
+t=(-4:0.05:8);
+f=@(t)((-4<t)&(t<0)).*(-t)+((0<t)&(t<2)).*(t);
+plot(t, f(t-4))
+xlabel('t'); ylabel('f(t)'); grid;
+axis([-1 7 -1 5])
+%%
+% b)  $x(2t/3)$
+%%
+t=(-6:0.05:8);
+f=@(t)((-4<t)&(t<0)).*(-t)+((0<t)&(t<2)).*(t);
+plot(t, f((2*t)/3))
+xlabel('t'); ylabel('f(t)'); grid;
+axis([-7 7 -1 5])
+%%
+% c)  $x(-t)$
+%%
+t=(-6:0.05:8);
+f=@(t)((-4<t)&(t<0)).*(-t)+((0<t)&(t<2)).*(t);
+plot(t, f(-t))
+xlabel('t'); ylabel('f(t)'); grid;
+axis([-7 7 -1 5])
+%%
+% d)  $x(2t-4)$
+%%
+t=(-6:0.05:8);
+f=@(t)((-4<t)&(t<0)).*(-t)+((0<t)&(t<2)).*(t);
+plot(t, f(2*t-4))
+xlabel('t'); ylabel('f(t)'); grid;
+axis([-7 7 -1 5])
+%%
+% e)  $x(2-t)$
+%%
+t=(-6:0.05:8);
+f=@(t)((-4<t)&(t<0)).*(-t)+((0<t)&(t<2)).*(t);
+plot(t, f(2-t))
+xlabel('t'); ylabel('f(t)'); grid;
+axis([-7 7 -1 5])
+%%
+%% Entregable 06
+% Escriba una función que se llame _energia_ que reciba como argumento
+% una función (anonima o simbolica) y que regrese el calculo de la energía,
+% para esto puede resultar útil investigar las instrucciones _int_ , _integral_
+% Se presupone utilizar el código solo con funciones de energia. Muestre
+% el código sin ejecutar, y posteriormente resuelva el problema 1.1.3
+%
+%       function [energia]=Energia(x,li, ls) 
+%       
+%           energia=double(x^2,li,ls);  
+%       end
+%
+% Ahora calculamos la energía del ejercicio 1.1.3
+%
+% inciso a
+%
+%%
+syms t;
+ ex(1*t,0,1)
+
+ ex(-1*t,1,2)
+
+ ex((1+(-1))*t,0,2)
+ 
+ ex((1-(-1))*t,0,2)
+%%
+
+% Inciso b
+%%
+ ex(sin(t),0,2*pi)
+
+ ex(1*t,0,2*pi)
+ 
+ ex(sin(t)+1,0,2*pi)
+ 
+ ex(sin(t)-1,0,2*pi)
+%%
+% Inciso c
+%% 
+ ex(sin(t),0,pi)
+ 
+ ex(1*t,0,pi)
+
+ ex(sin(t)+1,0,pi)
+ 
+ ex(sin(t)-1,0,pi)
+%%
+%% Entregable 07
+% Escriba una función que se llame _potencia_ que reciba como argumento
+% una función (anonima o simbolica) y que regrese el calculo de la potencia
+% para esto puede resultar útil investigar las instrucciones _int_ , _integral_
+% Se presupone utilizar el código solo con funciones de potencia. Muestre
+% el código sin ejecutar, y posteriormente resuelva el problema 1.1.4
+%%
+%   function [potencia,rms] = px(x,li,ls)
+%       if li<0
+%           li=(-1)*li;
+%       end
+%       potencia=(1/(li+ls))*(int(x^2,-li/2,ls/2));
+%       format short;
+%       rms=sqrt(potencia);
+%       rms=vpa(rms,5);
+%   end
+%%
+%%
+% Resolvemos el ejercicio 1.1.4
+%
+% Inciso a
+%
+syms x c;
+%%
+ px(-x,-2,2)
+
+%%
+% Inciso b
+%
+%%
+ px(2*x,-2,2)
+%%
+% Inciso c
+%
+%%
+ px(c*x,-2,2)
+%% Referencias.
+%
+% <https://www.mathworks.com/help/matlab/learn_matlab/product-description.html>
+%
+% <https://www.ecured.cu/MATLAB>
+%
+% <https://es.wikipedia.org/wiki/GNU_Octave>
+%
+% B. P. Lathi, Linear Systems and Signals, Second Edition, Oxford
+%
+% University Press, Inc.,  2005, segunda edicion, pp. 689.
+
+##### SOURCE END #####
+--></body></html>
